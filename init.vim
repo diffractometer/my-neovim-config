@@ -476,6 +476,8 @@ let g:delimitMate_autoclose = 1           " Auto-close pairs
 " Appearance {{{
 " ============================================================================
 set background=dark
+" Set Janah's terminal background color before loading the scheme
+autocmd ColorScheme janah highlight Normal ctermbg=235
 colorscheme janah
 hi Comment cterm=italic
 
