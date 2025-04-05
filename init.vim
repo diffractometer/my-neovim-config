@@ -149,7 +149,6 @@ Plug 'vim-airline/vim-airline'           " Status line
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'          " Code commenting
 Plug 'junegunn/vim-easy-align'           " Alignment
-Plug 'enricobacis/vim-airline-clock'    " Clock in status line
 Plug 't9md/vim-choosewin'              " Window selection
 
 " Language Support
@@ -221,6 +220,19 @@ augroup END
 
 colorscheme janah                             " Load the Janah colorscheme
 hi Comment cterm=italic                       " Make comments italic in terminal
+
+" Modern line number styling with no borders
+hi LineNr ctermbg=235 ctermfg=240            " Line numbers on same background
+hi CursorLineNr cterm=bold ctermfg=252       " Bold bright number for current line
+set cursorline                               " Highlight current line
+hi clear CursorLine                          " Remove underline from current line
+hi CursorLine ctermbg=235                    " Match cursorline with background
+hi VertSplit ctermbg=235 ctermfg=235        " Remove vertical split borders
+hi StatusLine ctermbg=235 ctermfg=240       " Status line color
+hi StatusLineNC ctermbg=235 ctermfg=240     " Inactive status line color
+hi SignColumn ctermbg=235                    " Sign column background
+hi FoldColumn ctermbg=235                    " Fold column background
+hi ColorColumn ctermbg=235                   " Color column background
 
 " Note: For iTerm2 users:
 " Font settings are managed in iTerm2 Preferences > Profiles > Text
