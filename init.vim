@@ -1,4 +1,12 @@
-" Hunter Husar's Neovim Configuration
+"==============================================================================
+"   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+"   █                                                                    █
+"   █                     Hunter Husar's Neovim Terminal                 █
+"   █                        [ Command Interface ]                       █
+"   █                                                                    █
+"   █              Ready for deep space text editing, Captain            █
+"   █                                                                    █
+"   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 " ============================================================================
 " Functions {{{
@@ -14,6 +22,12 @@ function! BuildComposer(info)
     endif
   endif
 endfunction
+
+" Janah Terminal Colors
+augroup JanahColors
+    autocmd!
+    autocmd ColorScheme janah highlight Normal ctermbg=235
+augroup END
 
 " NERDTree File Highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -476,8 +490,6 @@ let g:delimitMate_autoclose = 1           " Auto-close pairs
 " Appearance {{{
 " ============================================================================
 set background=dark
-" Set Janah's terminal background color before loading the scheme
-autocmd ColorScheme janah highlight Normal ctermbg=235
 colorscheme janah
 hi Comment cterm=italic
 
