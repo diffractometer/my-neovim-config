@@ -137,30 +137,30 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Essential Development Tools
-Plug 'scrooloose/syntastic'               " Syntax checking
-Plug 'tpope/vim-fugitive'                 " Git integration
 Plug 'scrooloose/nerdtree'               " File explorer
+"Plug 'scrooloose/syntastic'               " Syntax checking
+"Plug 'tpope/vim-fugitive'                 " Git integration
+Plug 't9md/vim-choosewin'              " Window selection
 Plug 'tpope/vim-surround'                 " Text surroundings
 Plug 'Raimondi/delimitMate'              " Auto-pairing
 Plug 'vim-airline/vim-airline'           " Status line
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdcommenter'          " Code commenting
-Plug 'junegunn/vim-easy-align'           " Alignment
-" Plug 't9md/vim-choosewin'              " Window selection (temporarily disabled)
+"Plug 'scrooloose/nerdcommenter'          " Code commenting
+"Plug 'junegunn/vim-easy-align'           " Alignment
 
 " Language Support
 Plug 'leafgarland/typescript-vim'         " TypeScript
 Plug 'udalov/kotlin-vim'                 " Kotlin
 Plug 'pangloss/vim-javascript'           " JavaScript
 Plug 'vim-python/python-syntax'          " Python
-Plug 'tpope/vim-classpath'              " Clojure classpath
-Plug 'tpope/vim-fireplace'              " Clojure REPL
-Plug 'guns/vim-clojure-static'          " Clojure syntax
+"Plug 'tpope/vim-classpath'              " Clojure classpath
+"Plug 'tpope/vim-fireplace'              " Clojure REPL
+"Plug 'guns/vim-clojure-static'          " Clojure syntax
 Plug 'kien/rainbow_parentheses.vim'     " Rainbow parens
 Plug 'jpalardy/vim-slime'              " REPL interaction
 
 " Documentation
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+"Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " Theme
 Plug 'mhinz/vim-janah'                 " Current theme
@@ -185,19 +185,18 @@ let g:syntastic_check_on_wq = 0               " Don't check syntax when writing/
 let g:syntastic_javascript_checkers = ['eslint'] " Use ESLint for JavaScript files
 
 " Choosewin - Window selection
+nmap - <Plug>(choosewin)                   " Trigger window selection with -
 let g:choosewin_overlay_enable = 1        " Enable overlay feature
-let g:choosewin_statusline_replace = 0    " Don't replace statusline
-let g:choosewin_tabline_replace = 0       " Don't replace tabline
-let g:choosewin_label = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  " Use letters for window selection
-let g:choosewin_blink_on_land = 0        " Don't blink when moving to window
-let g:choosewin_overlay_shade = 0         " Disable shade
+let g:choosewin_blink_on_land = 0        " Disable blinking
+let g:choosewin_overlay_shade = 0         " Disable shading
+" Explicitly set overlay colors (with correct syntax)
 let g:choosewin_color_overlay = {
-    \ 'gui': ['DodgerBlue3', 'DodgerBlue3'],
-    \ 'cterm': [25, 25]
+    \ 'gui': ['#404040', '#404040'],
+    \ 'cterm': [238, 238], 
     \ }
 let g:choosewin_color_overlay_current = {
-    \ 'gui': ['firebrick1', 'firebrick1'],
-    \ 'cterm': [196, 196]
+    \ 'gui': ['#FFA500', '#FFA500'],
+    \ 'cterm': [214, 214], 
     \ }
 
 " NERDTree - File explorer settings
@@ -306,17 +305,6 @@ tnoremap <Esc> <C-\><C-n>                    " Exit terminal mode with Esc
 vnoremap <silent> <Enter> :EasyAlign<Enter>   " Start EasyAlign in visual mode (e.g. vipga)
 nnoremap <Leader>w :call ToggleWS()<CR>  " Toggle whitespace stripping with ,w
 nnoremap <leader>c :g#\({\n\)\@<=#.,/\.*[{}]\@=/-1 sort    " Sort CSS properties with ,c
-" nmap - <Plug>(choosewin)                   " Trigger window selection with -
-" let g:choosewin_keymap = {
-    \ '0':     '<NOP>',
-    \ '[':     'previous',
-    \ ']':     'next',
-    \ 'h':     'left',
-    \ 'j':     'down',
-    \ 'k':     'up',
-    \ 'l':     'right',
-    \ 'q':     'quit',
-    \ }
 
 " }}}
 
