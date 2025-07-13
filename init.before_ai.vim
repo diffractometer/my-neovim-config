@@ -386,7 +386,7 @@ set wildignore+=lib
 nnoremap <leader>c :g#\({\n\)\@<=#.,/\.*[{}]\@=/-1 sort
 
 " Choosewin
-nmap  -  <Plug>(choosewin)
+nnoremap  -  <Plug>(choosewin)
 let g:choosewin_overlay_enable=1
 
 " terminal switch win

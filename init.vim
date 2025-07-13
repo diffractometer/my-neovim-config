@@ -140,7 +140,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'               " File explorer
 "Plug 'scrooloose/syntastic'               " Syntax checking
 "Plug 'tpope/vim-fugitive'                 " Git integration
-Plug 't9md/vim-choosewin'              " Window selection
 Plug 'tpope/vim-surround'                 " Text surroundings
 Plug 'Raimondi/delimitMate'              " Auto-pairing
 Plug 'vim-airline/vim-airline'           " Status line
@@ -165,7 +164,39 @@ Plug 'jpalardy/vim-slime'              " REPL interaction
 " Theme
 Plug 'mhinz/vim-janah'                 " Current theme
 
+" NERDTree - File explorer settings
+let g:NERDTreeDirArrows = 1                   " Use nice arrow symbols for directories
+let g:NERDTreeMinimalUI = 1                   " Minimal UI for cleaner look
+let g:NERDTreeDirArrowExpandable = '▸'        " Symbol for expandable directories
+let g:NERDTreeDirArrowCollapsible = '▾'       " Symbol for collapsed directories
+let g:NERDTreeShowHidden = 1                  " Show hidden files by default
+let g:NERDTreeIgnore = ['.git$', '.DS_Store', '*.swp', '*.swo', 'node_modules', '*.pyc']  " Files to hide
+let g:NERDTreeAutoDeleteBuffer = 1            " Delete buffer when file is deleted
+let g:NERDTreeQuitOnOpen = 0                  " Don't quit NERDTree when opening a file
+let g:NERDTreeMouseMode = 2                   " Single click to open directories, double click for files
+let g:NERDTreeMinimalMenu = 1                 " Use minimal menu
+let g:NERDTreeAutoCenter = 1                  " Automatically center when scrolling
+let g:NERDTreeShowLineNumbers = 0             " Don't show line numbers
+let g:NERDTreeStatusline = -1                 " Disable statusline for NERDTree window
+let g:NERDTreeWinSize = 31                    " Set width of NERDTree window
+let g:NERDTreeHijackNetrw = 1                 " Replace netrw with NERDTree
+let g:NERDTreeChDirMode = 2                   " Change Vim's current working directory when root changes
+let g:NERDTreeCreatePrefix = 'silent'         " Silence directory creation messages
+let g:NERDTreeNotificationThreshold = 100     " Reduce file count notifications
+let g:NERDTreeHighlightCursorline = 1         " Highlight the current line
+
+" Basic NERDTree mappings
+nnoremap <silent> <C-a> :NERDTreeToggle<CR>   " Toggle file explorer with Ctrl+a
+
+" Minimal choosewin install for Neovim
+Plug 't9md/vim-choosewin'
+
 call plug#end()
+
+let g:choosewin_tabline_replace = 0
+let g:choosewin_overlay_enable = 1
+nnoremap - <Plug>(choosewin)
+
 " }}}
 
 " ============================================================================
@@ -183,54 +214,6 @@ let g:syntastic_auto_loc_list = 1             " Automatically open location list
 let g:syntastic_check_on_open = 1             " Check syntax when opening files
 let g:syntastic_check_on_wq = 0               " Don't check syntax when writing/quitting
 let g:syntastic_javascript_checkers = ['eslint'] " Use ESLint for JavaScript files
-
-" Choosewin - Window selection
-nmap - <Plug>(choosewin)                   " Trigger window selection with -
-let g:choosewin_overlay_enable = 1        " Enable overlay feature
-let g:choosewin_blink_on_land = 0        " Disable blinking
-let g:choosewin_overlay_shade = 0         " Disable shading
-" Explicitly set overlay colors (with correct syntax)
-let g:choosewin_color_overlay = {
-    \ 'gui': ['#404040', '#404040'],
-    \ 'cterm': [238, 238], 
-    \ }
-let g:choosewin_color_overlay_current = {
-    \ 'gui': ['#FFA500', '#FFA500'],
-    \ 'cterm': [214, 214], 
-    \ }
-
-" NERDTree - File explorer settings
-let g:NERDTreeDirArrows = 1                   " Use nice arrow symbols for directories
-let g:NERDTreeMinimalUI = 1                   " Minimal UI for cleaner look
-let g:NERDTreeDirArrowExpandable = '▸'        " Symbol for expandable directories
-let g:NERDTreeDirArrowCollapsible = '▾'       " Symbol for collapsed directories
-let g:NERDTreeShowHidden = 1                  " Show hidden files by default
-let g:NERDTreeIgnore = ['.git$', '.DS_Store', '*.swp', '*.swo', 'node_modules', '*.pyc']  " Files to hide
-let g:NERDTreeAutoDeleteBuffer = 1            " Delete buffer when file is deleted
-let g:NERDTreeQuitOnOpen = 0                  " Don't quit NERDTree when opening a file
-let g:NERDTreeMouseMode = 2                   " Single click to open directories, double click for files
-let g:NERDTreeMinimalMenu = 1                 " Use minimal menu
-let g:NERDTreeAutoCenter = 1                  " Automatically center when scrolling
-let g:NERDTreeShowLineNumbers = 0             " Don't show line numbers
-let g:NERDTreeStatusline = -1                 " Disable statusline for NERDTree window
-let g:NERDTreeWinSize = 31                    " Set width of NERDTree window
-let g:NERDTreeHijackNetrw = 1                " Replace netrw with NERDTree
-let g:NERDTreeChDirMode = 2                  " Change Vim's current working directory when root changes
-let g:NERDTreeCreatePrefix = 'silent'         " Silence directory creation messages
-let g:NERDTreeNotificationThreshold = 100     " Reduce file count notifications
-
-" Basic NERDTree mappings
-nnoremap <silent> <C-a> :NERDTreeToggle<CR>   " Toggle file explorer with Ctrl+a
-" Removing custom mappings as they might be causing the issue
-" augroup NERDTreeMappings
-"     autocmd!
-"     autocmd FileType nerdtree nmap <buffer> <silent> o go<CR>
-"     autocmd FileType nerdtree nmap <buffer> <silent> O go<CR>
-"     autocmd FileType nerdtree nmap <buffer> <silent> <CR> go<CR>
-" augroup END
-
-" Adding back setting from original config
-let g:NERDTreeHighlightCursorline = 1
 
 " DelimitMate - Auto-pairing of brackets, quotes, etc.
 let g:delimitMate_expand_cr = 1               " Expand carriage returns between pairs
@@ -294,7 +277,6 @@ noremap <C-k> <C-w>k                         " Move to split above
 noremap <C-l> <C-w>l                         " Move to right split
 
 " File Navigation
-nmap <silent> <C-a> :NERDTreeToggle<CR>      " Toggle file explorer with Ctrl+a
 nnoremap <leader>l :nohls<CR><C-L>           " Clear search highlighting with ,l
 nnoremap <leader>d :$                        " Jump to end of file with ,d
 
